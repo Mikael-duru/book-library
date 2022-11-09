@@ -11,9 +11,10 @@ class Book {
 
 class UI {
   static displayBooks() {
-    const books = Store.getBooks();
+    const createdBooks = []
+    const books = createdBooks;
 
-    books.forEach((book) => UI.addBookToList(book));
+    books.forEach((book) => Register.addBookToList(book))
   }
 
   static addBookToList(book) {
@@ -52,38 +53,6 @@ class UI {
   }
 }
 
-// Store Class: Handles Storage
-class Store {
-  static getBooks() {
-    let books;
-    if(localStorage.getItem('books') === null) {
-      books = [];
-    } else {
-      books = JSON.parse(localStorage.getItem('books'));
-    }
-
-    return books;
-  }
-
-  static addBook(book) {
-    const books = Store.getBooks();
-    books.push(book);
-    localStorage.setItem('books', JSON.stringify(books));
-  }
-
-  static removeBook(isbn) {
-    const books = Store.getBooks();
-
-    books.forEach((book, index) => {
-      if(book.isbn === isbn) {
-        books.splice(index, 2);
-      }
-    });
-
-    localStorage.setItem('books', JSON.stringify(books));
-  }
-}
-
 // Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
@@ -107,9 +76,6 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
     // Add Book to UI
     UI.addBookToList(book);
-
-    // Add book to store
-    Store.addBook(book);
 
     // Show success message
     UI.showAlert('Book Added', 'success');
@@ -143,89 +109,7 @@ document.querySelector("#book-list").addEventListener("click",(e) => {
   if (target.classList.contains("delete")){
       target.parentElement.parentElement.remove();
 
-      // Remove book from store
-      Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
-
       // Show success message
       UI.showAlert('Book Removed', 'success');
   }
 });
-
-
-
-
-
-// document.querySelector('#book-form').addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-//   const title = document.getElementById('title').value;
-//   const author = document.getElementById('name').value;
-//   const isbn = document.getElementById('email').value;
-
-//   //instantiate the new book
-//   const book = new Book(title, author, isbn);
-
-//   // Storage
-//   const books = window.localStorage.getItem('books');
-//     if(!books){
-//       window.localStorage.setItem('books', JSON.stringify([userData]))
-//     }else{
-//       const getCurrentBook = window.localStorage.getItem('books')
-//       let currentBook = JSON.parse(getCurrentBook)
-//       currentBook.push(book)
-//       window.localStorage.setItem('books', JSON.stringify(currentBook))
-//     }
-
-
-// })
-
-
-
-// function submitForm(e){
-//   e.preventDefault();
-// let title = document.getElementById('title').value
-// let name = document.getElementById('name').value
-// let email = document.getElementById('email').value
-// let phone = document.getElementById('phone').value
-// let gender = document.getElementById('gender').value
-// let userData = new User("Miss", "Gladys", "gladys@gmail.com", 08123455677, "female")
-//  let newUser = new User(title, name, email, phone, gender);
-//  const user = window.localStorage.getItem('users')
-//  if(!user){
-//   window.localStorage.setItem('users', JSON.stringify([userData]))
-//  }else{
-//   const getCurrentUser = window.localStorage.getItem('users')
-//   let currentUser = JSON.parse(getCurrentUser)
-//   currentUser.push(newUser)
-//   window.localStorage.setItem('users', JSON.stringify(currentUser))
-//  }
-
-// }
-
-// function displayUser(){  
-//  const allUsers = window.localStorage.getItem('users')
-//  const users = JSON.parse(allUsers)
-
-//  console.log(users)
-
-//   // users.map(user => )
-//  return users.map(item => {
-//     // console.log(item)
-//     return  `
-//   <tr>
-//     <td>${item.title} ${item.name}</td>
-//     <td>${item.gender}</td>
-//     <td>${item.phone}</td>
-//     <td>${item.email}</td>
-//     <td class="actions">
-//       <a class="edit" href="http://">Edit</a>
-//       <a class="delete" href="http://">Delete</a>
-//     </td>
-
-
-//   </tr>
-//       `
-  
-//   });
-// }
-// renderPage.innerHTML = displayUser()
