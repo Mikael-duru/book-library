@@ -24,14 +24,14 @@ document.querySelector("#form").addEventListener("submit", (e) => {
 
   const title = document.querySelector("#title").value;
   const body = document.querySelector("#body").value;
-  const userID = document.querySelector("#userID").value;
+  const userId = document.querySelector("#userID").value;
 
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     body: JSON.stringify({
       title: title,
       body: body,
-      userId: userID
+      userId: userId
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -44,11 +44,11 @@ document.querySelector("#form").addEventListener("submit", (e) => {
     const results = document.querySelector("#result");
 
     // const book = json.value;
-    const jsonBook = `${json.title} by ${json.body} ISBN: ${json.userId}`;
+    const jsonBook = `${json.title} by ${json.body}. ISBN: ${json.userId}`;
 
     // creates section tag with class of book
     const jsonBookEl = document.createElement("div");
-    jsonBookEl.classList.add("book", "mt-2");
+    jsonBookEl.classList.add("book", "mb-3");
 
     // creates div tag with class of content
     const jsonBookContentEl = document.createElement("div");
@@ -102,7 +102,7 @@ document.querySelector("#form").addEventListener("submit", (e) => {
     jsonBookContentEl.appendChild(jsonBookActionsEl);
 
     // add book class to list element
-    if (title === "" || body === "" || userID === "") {
+    if (title === "" || body === "" || userId === "") {
       showAlert("Please fill in all fields", "danger");
     } else {
       results.appendChild(jsonBookEl);
