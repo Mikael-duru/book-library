@@ -6,7 +6,7 @@ const fetchUsers = () => {
     .then(data => {
         data.map((item) => {
             let div = document.createElement("div");
-            div.classList.add('col-sm-6', 'gx-5', 'gy-4');
+            div.classList.add('col-sm-12', 'col-lg-6', 'gx-5', 'gy-4');
 
             const card = document.createElement("div");
             card.classList.add('card');
@@ -18,7 +18,6 @@ const fetchUsers = () => {
             <h2 class='card-title display-6 lead'>${item.name}</h2>
             <p class="card-text fs-5 fw-light"><strong>Email</strong>: ${item.email}</p>
             <p class="card-text fs-5 fw-light"><strong>Phone</strong>: ${item.phone}</p>
-            <p class="card-text fs-5 fw-light"><strong>Website</strong>: ${item.website}</p>
             <p class="card-text fs-5 fw-light"><strong>Address</strong>: ${item.address.suite} ${item.address.street} ${item.address.city}</p>
             `
             card.appendChild(cardBody)
